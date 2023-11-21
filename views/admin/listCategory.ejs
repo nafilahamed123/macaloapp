@@ -1,0 +1,33 @@
+<%- include('../adminlayout/adminheader.ejs') %>
+
+<div class="container mt-5">
+  <h1 class="mb-4">Category List</h1>
+  <div class="row">
+    <div class="col-md-8">
+      <ul class="list-group">
+        <% categories.forEach(category => { %>
+          <li class="list-group-item mb-4">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h5><strong><%= category.name %></strong></h5>
+                <% if (Array.isArray(category.subcategories) && category.subcategories.length > 0) { %>
+                  <ul class="list-group">
+                    <% category.subcategories.forEach(subcategory => { %>
+                      <li class="list-group-item"><%= subcategory %></li>
+                    <% }) %>
+                  </ul>
+                <% } %>
+              </div>
+              <div>
+                <a href="/admin/editCategory/<%= category._id %>" class="btn btn-warning btn-sm me-2">Edit</a>
+                <a href="/admin/deleteCategory/<%= category._id %>" class="btn btn-danger btn-sm">Delete</a>
+              </div>
+            </div>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<%- include('../adminlayout/adminfooter.ejs') %>

@@ -1,0 +1,24 @@
+<%- include('../adminlayout/adminheader.ejs') %>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Add Brands</h3>
+                </div>
+                <div class="card-body">
+
+                    <form method="POST" action="/admin/addBrands">
+                        <div class="mb-3">
+                            <label for="brandName" class="form-label">Brands Name:</label>
+                            <input type="text" name="brandName" id="brandName" class="form-control" required>
+                        </div>
+                       
+                        <button type="submit" class="btn btn-primary">Add Brands</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('../adminlayout/adminfooter.ejs') %>

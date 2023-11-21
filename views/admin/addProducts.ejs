@@ -1,0 +1,237 @@
+<%- include('../adminlayout/adminheader.ejs') %>
+<h1 class="text-center">Add Product</h1>
+
+<div class="container-fluid mt-5">
+    <form action="/admin/add-products" method="POST" enctype="multipart/form-data">
+    <div class="row ">
+        
+        <div class="col-md-6 ">
+            <div class="card ">
+                <div class="card-body">
+                        <div class="form-group">
+                            <label for="name">Product Name:</label>
+                            <input type="text" class="form-control" id="name" name="product" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category:</label>
+                            <select class="form-control" id="category" name="category" required>
+                                <option value="" disabled selected>Select a category</option>
+                                <% categories.forEach(category => { %>
+                                <option value="<%= category._id %>"><%= category.name %></option>
+                                <% }); %>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subCategory">Subcategory:</label>
+                            <select class="form-control" id="subCategory" name="subCategory" required>
+                                <option value="" disabled selected>Select a subcategory</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="brand">Brand:</label>
+                            <select class="form-control" id="brand" name="brand" required>
+                                <option value="" disabled selected>Select a brand</option>
+                                <% brands.forEach(brand => { %>
+                                <option value="<%= brand._id %>"><%= brand.name %></option>
+                                <% }); %>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="price">Price:</label>
+                            <input type="number" class="form-control" id="price" name="price" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description:</label>
+                            <textarea class="form-control" id="description" name="description" required></textarea>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+         <div class="card "> 
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="image">Product Images:</label>
+                    <input type="file" multiple class="form-control-file" id="image" name="image" accept="image/*" required>
+                </div>
+                
+                
+
+                <div class="form-group size-section mt-4">
+                    <label for="size">Size:</label>
+                    <label>
+                        <input type="checkbox" name="selectedSizes"  value="S"> S
+                        <input type="number" disabled class="sizeInput" id="sizeInputS" name="UnitS" value="Unit" data-size="S">
+                    </label>
+                    <label>
+                        <input type="checkbox" name="selectedSizes" value="M"> M
+                        <input type="number" disabled class="sizeInput" id="sizeInputM" name="UnitM" value="Unit" data-size="M">
+                    </label>
+                    <label>
+                        <input type="checkbox" name="selectedSizes" value="L"> L
+                        <input type="number" disabled class="sizeInput" id="sizeInputL" name="UnitL" value="Unit" data-size="L">
+                    </label>
+                    <label>
+                        <input type="checkbox" name="selectedSizes" value="XL"> XL
+                        <input type="number" disabled class="sizeInput" id="sizeInputXL" name="UnitXL" value="Unit" data-size="M">
+                    </label>
+                    <label>
+                        <input type="checkbox" name="selectedSizes" value="XXL"> XXL
+                        <input type="number" disabled class="sizeInput" id="sizeInputXXL" name="UnitXLL" value="Unit" data-size="L">
+                    </label>
+                </div>
+
+                
+                <div class="form-group foot-size-section mt-4">
+                    <label for="footSize">Foot Size:</label>
+                    <label>
+                        <input type="checkbox"  name="selectedFootSizes" value="US5"> US 5
+                        <input type="number" disabled  class="sizeInput" id="sizeInputUS5"  name="UnitUs5" value="Unit">
+                    </label>
+                    <label>
+                        <input type="checkbox" name="selectedFootSizes" value="US6"> US 6
+                        <input type="number" disabled class="sizeInput" id="sizeInputUS6" name="UnitUs6" value="Unit">
+                    </label>
+                    <label>
+                        <input type="checkbox" name="selectedFootSizes" value="US7"> US 7
+                        <input type="number" disabled class="sizeInput" id="sizeInputUS7" name="UnitUs7" value="Unit">
+                    </label>
+                    <label>
+                        <input type="checkbox" name="selectedFootSizes" value="US8"> US 8
+                        <input type="number" disabled class="sizeInput" id="sizeInputUS8" name="UnitUs8" value="Unit">
+                    </label>
+                    <label>
+                        <input type="checkbox" name="selectedFootSizes" value="US9"> US 9
+                        <input type="number" disabled class="sizeInput" id="sizeInputUS9" name="UnitUs9" value="Unit">
+                    </label>
+                    <label>
+                        <input type="checkbox" name="selectedFootSizes" value="US10"> US 10
+                        <input type="number" disabled class="sizeInput" id="sizeInputUS10" name="UnitUs10" value="Unit">
+                    </label>
+             </div>
+              
+             <div class="mt-4">
+                <label for="totalStock">Total Stock:</label>
+                <input type="number" id="totalStock" name="stock" value="0" readonly>
+            </div>
+
+            <div id="imagePreviews" class="image-previews">
+              
+            </div>
+            
+            
+             <div class="mt-3">
+                <button type="submit" class="btn btn-primary">Add Product</button>
+             </div>
+         </div>
+        </div>
+        
+    </form>
+    </div>
+</div>
+
+<script>
+
+const imageInput = document.getElementById('image');
+    const imagePreviews = document.getElementById('imagePreviews');
+
+    imageInput.addEventListener('change', function () {
+     imagePreviews.innerHTML = '';
+
+        // Loop through the selected files and display them as image previews.
+        for (const file of imageInput.files) {
+            if (file.type.startsWith('image/')) {
+                const img = document.createElement('img');
+                img.className = 'preview-image';
+                img.src = URL.createObjectURL(file);
+                imagePreviews.appendChild(img);
+            }
+        }
+    });
+    function enableQuantityInput(checkbox, size) {
+        const quantityInput = document.getElementById(`sizeInput${size}`);
+        quantityInput.disabled = !checkbox.checked;
+        if (!checkbox.checked) {
+            quantityInput.value = '';
+        }
+        calculateTotalStock();
+    }
+
+    document.getElementById("category").addEventListener("change", function () {
+        var categoryId = this.value;
+        var subCategoryDropdown = document.getElementById("subCategory");
+        var sizeSection = document.querySelector(".size-section");
+        var footSizeSection = document.querySelector(".foot-size-section");
+
+        subCategoryDropdown.innerHTML = '<option value="" disabled selected>Select a subcategory</option>';
+
+        if (categoryId) {
+            fetch(`/admin/get-subcategories/${categoryId}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.subcategories.forEach(subcategory => {
+                        var option = document.createElement("option");
+                        option.value = subcategory;
+                        option.text = subcategory;
+                        subCategoryDropdown.appendChild(option);
+                    });
+
+                    if (categoryId === '653022856c4a00915ad53fb1') {
+                        sizeSection.style.display = 'none';
+                        footSizeSection.style.display = 'block';
+                    } else if (categoryId === '652e7780a10d6a0f5723e0e2') {
+                        sizeSection.style.display = 'block';
+                        footSizeSection.style.display = 'none';
+                    } else {
+                        sizeSection.style.display = 'none';
+                        footSizeSection.style.display = 'none';
+                    }
+                });
+        }
+    });
+
+    function calculateTotalStock() {
+        const sizeInputs = document.querySelectorAll(".sizeInput");
+        let totalStock = 0;
+        sizeInputs.forEach(input => {
+            const size = input.dataset.size;
+            const quantity = parseInt(input.value);
+            if (!isNaN(quantity) && quantity >= 0 && !input.disabled) {
+                totalStock += quantity;
+            }
+        });
+
+        const totalStockInput = document.getElementById("totalStock");
+        totalStockInput.value = totalStock;
+    }
+
+    const sizeInputs = document.querySelectorAll(".sizeInput");
+    sizeInputs.forEach(input => {
+        input.addEventListener("input", calculateTotalStock);
+    });
+
+    const sizeCheckboxes = document.querySelectorAll("input[name='selectedSizes']");
+    sizeCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener("change", function () {
+            const size = this.value;
+            enableQuantityInput(this, size);
+        });
+    });
+
+    const footSizeCheckboxes = document.querySelectorAll("input[name='selectedFootSizes']");
+    footSizeCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener("change", function () {
+            const footSize = this.value;
+            enableQuantityInput(this, footSize);
+        });
+    });
+
+    calculateTotalStock();
+</script>
+
+<%- include('../adminlayout/adminfooter.ejs') %>

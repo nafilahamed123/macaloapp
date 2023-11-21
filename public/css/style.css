@@ -19,6 +19,32 @@ h6 {
 	font-family: "Nunito Sans", sans-serif;
 }
 
+/* rejistration */
+
+.gradient-custom-3 {
+	/* fallback for old browsers */
+	background: #84fab0;
+	
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+	
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+	}
+	.gradient-custom-4 {
+	/* fallback for old browsers */
+	background: #84fab0;
+	
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+	
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+	}
+
+	
+	  
+
 h1 {
 	font-size: 70px;
 }
@@ -75,6 +101,16 @@ ol {
 	padding: 0;
 	margin: 0;
 }
+
+/* customize */
+
+
+
+#emailField, #mobileField {
+	display: none;
+}
+
+
 
 /*---------------------
   Helper CSS
@@ -1220,7 +1256,7 @@ ol {
 .shop__sidebar__categories ul li a,
 .shop__sidebar__price ul li a,
 .shop__sidebar__brand ul li a {
-	color: #b7b7b7;
+	color: #131313;
 	font-size: 15px;
 	line-height: 32px;
 	-webkit-transition: all, 0.3s;
@@ -3330,6 +3366,24 @@ ol {
 .contact__form button {
 	letter-spacing: 4px;
 	padding: 14px 35px;
+}
+
+/* custom style */
+
+/* .product__item__pic.set-bg {
+	height: 450px; 
+  } */
+#timer{
+	
+	
+}
+.form-group #timer{
+	color: red;
+	padding-left: 140px;
+}
+
+.otp-section{
+	background-image: url('');
 }
 
 /*--------------------------------- Responsive Media Quaries -----------------------------*/

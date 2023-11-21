@@ -1,0 +1,23 @@
+<%- include('../adminlayout/adminheader.ejs') %>
+
+<div class="container mt-5">
+  <h1 class="mb-4">Brand List</h1>
+  <ul class="list-group">
+    <% brands.forEach(brand => { %>
+      <li class="list-group-item">
+        <div class="d-flex justify-content-between">
+          <div>
+            <h5><strong><%= brand.name %></strong></h5>
+            
+          </div>
+          <div>
+            <a href="/admin/editBrand/<%= brand._id %>" class="btn btn-warning btn-sm me-2">Edit</a>
+            <a href="/admin/delete-brand/<%= brand._id %>" class="btn btn-danger btn-sm">Delete</a>
+          </div>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+</div>
+
+<%- include('../adminlayout/adminfooter.ejs') %>
